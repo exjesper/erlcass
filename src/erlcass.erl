@@ -511,7 +511,10 @@ receive_session_connect(Keyspace, Self) ->
 
     after ?CONNECT_TIMEOUT ->
         ?ERROR_MSG("session ~p connection timeout", [Self]),
-        {error, connect_session_timeout}
+        case Keyspace of
+              ""       -> {error, connect_session_timeout};
+              Keyspace -> {error, missing_keyspace}
+        end
     end.
 
 session_prepare_cached_statements(SessionRef) ->
