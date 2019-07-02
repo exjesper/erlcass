@@ -77,12 +77,18 @@ void on_session_connect(CassFuture* future, void* user_data)
     callback_info* cb = static_cast<callback_info*>(user_data);
 
     ERL_NIF_TERM result;
+    printf("Callback received\n");
 
-    if (cass_future_error_code(future) != CASS_OK)
+    if (cass_future_error_code(future) != CASS_OK) {
+        printf("Callback future failure\n");
         result = cass_future_error_to_nif_term(cb->env, future);
-    else
+    }
+    else {
         result = ATOMS.atomOk;
+    }
 
+    printf("Callback Sending to pid\n");
+    printf("Callback received\n");
     enif_send(NULL, &cb->pid, cb->env, enif_make_tuple3(cb->env, ATOMS.atomSessionConnected, cb->arguments, result));
     callback_info_free(cb);
 }
