@@ -471,6 +471,7 @@ session_create() ->
                         ok -> {ok, Session};
                         {error, missing_keyspace} when KeyspaceCQL =/= "", Keyspace =/= "" ->
                             ?ERROR_MSG("Keyspace '~s' is missing, will create using: '~s'", [Keyspace, KeyspaceCQL]),
+                            do_close(Session, Self, 5000),
                             ok = do_connect(Session, Self),
                             case receive_session_connect("", Self) of
                                 ok ->
