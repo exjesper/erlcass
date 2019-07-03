@@ -74,10 +74,10 @@ void nif_cass_session_free(ErlNifEnv* env, void* obj)
 
 void on_session_connect(CassFuture* future, void* user_data)
 {
+    printf("Callback received\n");
     callback_info* cb = static_cast<callback_info*>(user_data);
 
     ERL_NIF_TERM result;
-    printf("Callback received\n");
 
     if (cass_future_error_code(future) != CASS_OK) {
         printf("Callback future failure\n");

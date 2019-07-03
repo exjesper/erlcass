@@ -24,5 +24,5 @@
 
 % timeouts
 
--define(RESPONSE_TIMEOUT, 20000).
--define(CONNECT_TIMEOUT, 15000).
+-define(RESPONSE_TIMEOUT, 180000).
+-define(CONNECT_TIMEOUT, 60000).
