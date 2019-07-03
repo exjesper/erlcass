@@ -512,7 +512,7 @@ receive_session_connect(Keyspace, Self) ->
         
         Something ->
             ?ERROR_MSG("Recived other: ~p", [Something]),
-            {error, missing_keyspace}
+            {error, something_else}
 
     after ?CONNECT_TIMEOUT ->
         ?ERROR_MSG("session ~p connection timeout", [Self]),
