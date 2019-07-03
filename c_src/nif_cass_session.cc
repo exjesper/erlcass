@@ -252,7 +252,7 @@ ERL_NIF_TERM nif_cass_session_connect(ErlNifEnv* env, int argc, const ERL_NIF_TE
 
     printf("Waiting for callback\n");
     CassError error = cass_future_set_callback(future, on_session_connect, callback);
-    if error == CASS_ERROR {
+    if (error != CASS_OK) {
         printf("Failed to set callback\n");
     }
 
