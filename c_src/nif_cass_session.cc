@@ -84,6 +84,7 @@ void on_session_connect(CassFuture* future, void* user_data)
         result = cass_future_error_to_nif_term(cb->env, future);
     }
     else {
+        printf("Callback future success\n");
         result = ATOMS.atomOk;
     }
 
