@@ -245,10 +245,13 @@ ERL_NIF_TERM nif_cass_session_connect(ErlNifEnv* env, int argc, const ERL_NIF_TE
 
     CassFuture* future;
 
-    if(argc == 3)
+    if(argc == 3) {
+        printf("connecting to %s\n", BIN_TO_STR(keyspace.data));
         future = cass_session_connect_keyspace_n(enif_session->session, data->cluster, BIN_TO_STR(keyspace.data), keyspace.size);
-    else
+    } else {
+        printf("connecting to default keyspace\n");
         future = cass_session_connect(enif_session->session, data->cluster);
+    }
 
     printf("Waiting for callback\n");
     CassError error = cass_future_set_callback(future, on_session_connect, callback);
