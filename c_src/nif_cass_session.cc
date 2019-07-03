@@ -250,6 +250,7 @@ ERL_NIF_TERM nif_cass_session_connect(ErlNifEnv* env, int argc, const ERL_NIF_TE
     else
         future = cass_session_connect(enif_session->session, data->cluster);
 
+    printf("Waiting for callback\n");
     CassError error = cass_future_set_callback(future, on_session_connect, callback);
 
     cass_future_free(future);
