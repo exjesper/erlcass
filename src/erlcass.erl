@@ -508,7 +508,11 @@ receive_session_connect(Keyspace, Self) ->
 
         {session_connected, Self, Result} ->
             ?INFO_MSG("session ~p connection complete result: ~p", [Self, Result]),
-            ok
+            ok;
+        
+        Something ->
+            ?ERROR_MSG("Recived other: ~p", [Something]),
+            {error, missing_keyspace}
 
     after ?CONNECT_TIMEOUT ->
         ?ERROR_MSG("session ~p connection timeout", [Self]),
