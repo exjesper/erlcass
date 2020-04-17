@@ -495,9 +495,6 @@ session_create() ->
                 Error ->
                     Error
             end;
-                Error ->
-                    Error
-            end;
         Error ->
             Error
     end.
